@@ -6,6 +6,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/workers', function() {
-    return 'this is worker from routes';
-});
+Route::get('/workers', [\App\http\Controllers\WorkerController::class,'index']);
+Route::get('/show', [\App\http\Controllers\WorkerController::class,'show']);
