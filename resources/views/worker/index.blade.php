@@ -7,7 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    index
+    <div>
+        <a href="{{route('worker.create')}}">Добавить</a>
+    </div>
     <div>
         @foreach ($workers as $worker)
         <hr>
