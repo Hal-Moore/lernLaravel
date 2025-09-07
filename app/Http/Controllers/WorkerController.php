@@ -6,6 +6,7 @@ use App\Models\Worker;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use App\Http\Requests\Worker\StoreRequest;
+use App\Http\Requests\Worker\UpdateRequest;
 
 class WorkerController extends Controller
 {
@@ -31,15 +32,18 @@ class WorkerController extends Controller
         return redirect()->route('worker.index');
     }       
 
-    public function update(){
+    public function edit(Worker $worker){
 
-        $worker=Worker::find(2);
-        $worker->update([
-            'name'=>'Karl',
-            'username'=>'Pugovkin',
-        ]);
+        return view('worker.edit',compact('worker'));
+    }
 
-        return 'was updeted';
+    public function update(UpdateRequest $request, Worker $worker){
+
+        $data=$request->validated();
+        $data['is_married']=isset($data['is_married']);
+        $worker->update($data);
+
+        return redirect()->route('worker.show',$worker->id);
     }
 
     public function delete(){

@@ -16,7 +16,7 @@
             <div style="margin-bottom: 20px"><input type="text" name="username" placeholder="Username"></div>
             <div style="margin-bottom: 20px"><input type="email" name="email" placeholder="Email"></div>
             <div style="margin-bottom: 20px"><input type="number" name="age" placeholder="Age"></div>
-            <div style="margin-bottom: 20px"><textarea name="description"></textarea></div>
+            <div style="margin-bottom: 20px"><textarea name="description" placeholder="description"></textarea></div>
             <div style="margin-bottom: 20px">
                 <input type="checkbox" id="is_married" value="1" name="is_married">
                 <label for="is_married">Is married</label>

@@ -22,7 +22,9 @@
                 <div>Is married: {{$worker->is_married}}</div>
                 <div>
                     <a href="{{ route('worker.show', $worker->id) }}">Посмотреть</a>
-                    
+                </div>
+                <div>
+                    <a href="{{ route('worker.edit', $worker->id) }}">Редактировать</a>
                 </div>
             </div>
         @endforeach
