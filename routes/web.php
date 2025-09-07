@@ -12,4 +12,4 @@ Route::get('/show/{worker}', [\App\http\Controllers\WorkerController::class,'sho
 Route::post('/workers', [\App\Http\Controllers\WorkerController::class,'store'])->name('worker.store');
 Route::get('/workers/{worker}/edit', [\App\Http\Controllers\WorkerController::class,'edit'])->name('worker.edit');
 Route::patch('/update/{worker}', [\App\Http\Controllers\WorkerController::class,'update'])->name('worker.update');
-Route::get('/delete',[\App\Http\Controllers\WorkerController::class,'delete'])->name('worker.delete');
+Route::delete('/delete/{worker}',[\App\Http\Controllers\WorkerController::class,'delete'])->name('worker.delete');
