@@ -3,55 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Models\Worker;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
+use App\Http\Requests\Worker\StoreRequest;
+use App\Http\Requests\Worker\UpdateRequest;
 
 class WorkerController extends Controller
 {
     public function index()
     {
         $workers= Worker::all();
-        foreach ($workers as $worker){
-            dump($worker->name);
-        }
-        return 'This index action of worker Controller';
+        return view('worker.index',compact('workers'));
     }
 
-    public function show(){
-        $worker= Worker::find(2);
-        dd($worker->toArray());
-        return 'This show action of worker Controller';
+    public function show(Worker $worker){
+        return view('worker.show',compact('worker'));
     }
 
     public function create(){
 
-        $worker=[
-            'name'=>'Mark',
-            'username'=>'Markov',
-            'email'=>'markov@gmail.com',
-            'age'=>'25',
-            'description'=>'just text',
-            'is_married'=>false
-        ];
-
-        Worker::create($worker);
-
-        return 'Ivan was created';
+        return view('worker.create');
     }
 
-    public function update(){
+    public function store(StoreRequest $request){
+        $data=$request->validated();
+        $data['is_married']=isset($data['is_married']);
+        Worker::create($data);
+        return redirect()->route('worker.index');
+    }       
 
-        $worker=Worker::find(2);
-        $worker->update([
-            'name'=>'Karl',
-            'username'=>'Pugovkin',
-        ]);
+    public function edit(Worker $worker){
 
-        return 'was updeted';
+        return view('worker.edit',compact('worker'));
     }
 
-    public function delete(){
-        $worker=Worker::find(2);
+    public function update(UpdateRequest $request, Worker $worker){
+
+        $data=$request->validated();
+        $data['is_married']=isset($data['is_married']);
+        $worker->update($data);
+
+        return redirect()->route('worker.show',$worker->id);
+    }
+
+    public function delete(Worker $worker){
+        
         $worker->delete();
-        return 'was delete';
+        return redirect()->route('worker.index');
     }
 }
