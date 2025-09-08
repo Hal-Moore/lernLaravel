@@ -22,12 +22,37 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string',
-            'username'=>'required|string',
-            'email'=>'required|email',
+            'name'=>'required|string|alpha',
+            'username'=>'required|string|alpha',
+            'email'=>'required|email|unique:workers,email',
             'age'=>'nullable|integer',
-            'description'=>'nullable|string',
+            'description'=>'nullable|string|max:50',
             'is_married'=>'nullable|boolean',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required'=>'Имя обязательно',
+            'name.string'=>'Имя должно быть строкой',
+            'name.alpha'=>'Имя должно содержать только буквы',
+
+            'username.required'=>'Фамилия обязательна',
+            'username.string'=>'Фамилия должна быть строкой',
+            'username.alpha'=>'Фамилия должна содержать только буквы',
+
+            'email.required'=>'Email обязателен',
+            'email.email'=>'Email должен быть формата email',
+            'email.unique'=>'Такой email уже существует',
+
+            'age.integer'=>'Возраст должен быть числом',
+
+
+            'description.string'=>'Описание должно быть строкой',
+            'description.max'=>'Описание должно быть не больше 50 символов',
+
+            'is_married.boolean'=>'Значение должно быть логическим',
         ];
     }
 }
