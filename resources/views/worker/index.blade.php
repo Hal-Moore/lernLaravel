@@ -10,6 +10,22 @@
     <div>
         <a href="{{route('worker.create')}}">Добавить</a>
     </div>
+    <hr>
+    <div>
+        <form action="{{route('worker.index')}}" method="get">
+            <input type="text" name="name" placeholder="Name" value="{{request()->get('name')}}">
+            <input type="text" name="username" placeholder="Username" value="{{request()->get('username')}}">
+            <input type="text" name="email" placeholder="Email" value="{{request()->get('email')}}">
+            <input type="number" name="from" placeholder="From" value="{{request()->get('from')}}">
+            <input type="number" name="to" placeholder="To" value="{{request()->get('to')}}">
+            <input type="text" name="description" placeholder="Description" value="{{request()->get('description')}}">
+            <input type="checkbox" id="is_married" name="is_married" value="1"
+            {{ request('is_married') === '1' ? 'checked' : '' }}>
+            <label for="is_married">Is married</label>
+            <input type="submit" value="Search">
+            <a href="{{route('worker.index')}}">Сбросить</a>
+        </form>
+    </div>
     <div>
         @foreach ($workers as $worker)
         <hr>

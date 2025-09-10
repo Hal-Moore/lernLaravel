@@ -2,17 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Worker\IndexRequest;
 use App\Models\Worker;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use App\Http\Requests\Worker\StoreRequest;
 use App\Http\Requests\Worker\UpdateRequest;
+use Illuminate\Validation\Rules\In;
 
 class WorkerController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
-        $workers= Worker::paginate(2);
+
+        $data=$request->validated();
+
+        $workerQuery=Worker::query();
+
+        if(isset($data['name'])){
+            $workerQuery->where('name','like',"%{$data['name']}%");
+        }
+        if(isset($data['username'])){
+            $workerQuery->where('username','like',"%{$data['username']}%");
+        }
+        if(isset($data['email'])){
+            $workerQuery->where('email','like',"%{$data['email']}%");
+        }  
+        if(isset($data['from'])){
+            $workerQuery->where('age','>',$data['from']);
+        }
+        if(isset($data['to'])){
+            $workerQuery->where('age','<',$data['to']);
+        }
+        if(isset($data['description'])){
+            $workerQuery->where('description','like',"%{$data['description']}%");
+        }
+        if(isset($data['is_married'])){
+            $workerQuery->where('is_married', true);
+        }
+
+
+        $workers= $workerQuery->paginate(4);
         return view('worker.index',compact('workers'));
     }
 
