@@ -34,6 +34,15 @@
                     </form>
             </div>
         @endforeach
+
+        <div class="my_pagination">
+            {{ $workers->links() }}
+        </div>
     </div>
+    <style>
+        .my_pagination svg{
+            width: 20px;
+        }
+    </style>
 </body>
 </html>
