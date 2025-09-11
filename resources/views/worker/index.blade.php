@@ -52,7 +52,7 @@
         @endforeach
 
         <div class="my_pagination">
-            {{ $workers->links() }}
+            {{ $workers->withQueryString()->links() }}
         </div>
     </div>
     <style>
