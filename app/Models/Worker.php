@@ -14,5 +14,5 @@ class Worker extends Model
 
     public function profile(){
     return $this->hasOne(Profile::class, 'worker_id', 'id');
-};
+}
 }
