@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Department;
 use App\Models\Position;
 use App\Models\Worker;
 use App\Models\Profile;
@@ -32,28 +33,42 @@ class DevCommand extends Command
     {
         //$this->prepareData();
         //$this->prepareManyToMany();
-        $worker=Worker::find(2);
-        $worker1=Worker::find(3);
-        $worker2=Worker::find(4);
-        $project=Project::find(1);
+        //$worker=Worker::find(2);
+        //$worker1=Worker::find(3);
+        //$worker2=Worker::find(4);
+        //$project=Project::find(1);
 
         //$worker->projects()->toggle($project->id);
         //$project->workers()->detach($worker->id);
         //$project->workers()->attach($worker1->id);
-        $project->workers()->sync($worker2->id);
+        //$project->workers()->sync($worker2->id);
+        $this->prepareData();
+        $this->prepareManyToMany();
         return 0;
     }
 
     private  function prepareData(){
 
+        $department1=Department::create([
+            'title'=>'IT',
+        ]);
+        $department2=Department::create([
+            'title'=>'HR',
+        ]);
+
+
+
         $position1=Position::create([
             'title'=>'Manager',
+            'department_id'=>$department1->id,
         ]);
         $position2=Position::create([
             'title'=>'Developer',
+            'department_id'=>$department1->id,
         ]);
         $position3=Position::create([
             'title'=>'Designer',
+            'department_id'=>$department2->id,
         ]);
 
 
@@ -233,14 +248,6 @@ class DevCommand extends Command
             'worker_id'=>$workerDesigner2->id,
         ]);
 
-
-
-
-
-
-
     }
-
-    
 
 }
